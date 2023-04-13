@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  baronavpn:
+    build: .
+    image: relicode/openconnect-proxy:latest
+    volumes:
+      - ./tinyproxy.conf:/etc/tinyproxy/tinyproxy.conf:ro
+    environment:
+      SVPNCOOKIE:
+    ports:
+      - 127.0.0.1:18888:8888
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    restart: 'no'
+
